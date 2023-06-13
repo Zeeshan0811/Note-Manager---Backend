@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,15 +16,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Public Routes
+
+// User Authentication
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+// Note CRUD API
 Route::get('/notes', [NoteController::class, 'index']);
 Route::get('/notes/{id}', [NoteController::class, 'show']);
 Route::get('/notes/search/{key}', [NoteController::class, 'search']);
 
-Route::post('/notes', [NoteController::class, 'store']);
-Route::put('/notes/{id}', [NoteController::class, 'update']);
-Route::delete('/notes/{id}', [NoteController::class, 'destroy']);
+// Protected Routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/current_user', [AuthController::class, 'current_user']);
+    Route::get('/logout', [AuthController::class, 'logout']);
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('/notes', [NoteController::class, 'store']);
+    Route::put('/notes/{id}', [NoteController::class, 'update']);
+    Route::delete('/notes/{id}', [NoteController::class, 'destroy']);
 });

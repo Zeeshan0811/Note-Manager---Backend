@@ -28,9 +28,13 @@ class NoteController extends Controller
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
-            'user_id' => 'required'
+            // 'user_id' => 'required'
         ]);
-        return Note::create($request->all());
+
+        return Note::create($request->all() + ['user_id' => auth()->user()->id]);
+
+        // $note_data['user_id'] = auth()->user()->id;
+        // return Note::create($note_data);
     }
 
     /**
