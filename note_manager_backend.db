@@ -1,0 +1,244 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.11
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 18, 2023 at 01:54 AM
+-- Server version: 10.5.21-MariaDB-cll-lve-log
+-- PHP Version: 7.4.33
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `note_manager_backend`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2023_06_12_110456_create_notes_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notes`
+--
+
+CREATE TABLE `notes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notes`
+--
+
+INSERT INTO `notes` (`id`, `title`, `slug`, `description`, `user_id`, `created_at`, `updated_at`) VALUES
+(34, 'The Cheesecake Factory', 'the-cheesecake-factory', 'The Cheesecake Factory is an American chain of restaurants, localized around the world. If you’re not familiar with it, you may recognize the name from the hit series The Big Bang Theory. They have a large following on Facebook and regularly post about food that’s on their menu. These posts get a lot of engagement, due to the great images used and the funny text accompanying them.', 1, '2023-06-17 19:59:05', '2023-06-17 19:59:05'),
+(35, 'Google: Share', 'google-share', 'Google Maps is one of those things that doesn’t need much explaining. Most people know what it does, it helps you get from A to B. It can even find you a faster route when there’s loads of traffic up ahead. But a few days back, Google shared an interesting customer story on Twitter. Apparently, marine biologist Johnny Gaskell and a team of researchers, use Google Maps to explore ocean life. You know, way down there. Something that would have taken a lot more time if they haven’t had access to Maps. Quite a unique customer story and a cool way to look at a service that has become so normal in our day-to-day life.', 1, '2023-06-17 19:59:48', '2023-06-17 19:59:48'),
+(36, 'Social Media Examiner', 'social-media-examiner', 'Social Media Examiner is a media company that’s based in the United States. It publishes online magazines, blogs and podcasts about how business people can use social networks. They share interesting news on their Twitter account on a regular basis and have more than 500,000 followers there. The reason that they have so much content to share is that there’s a large community of experts that creates content for Social Media Examiner. Like this blog on social media marketing strategy that they shared a while back.', 1, '2023-06-17 20:00:28', '2023-06-17 20:00:28'),
+(37, 'Involve your fans and let them get creative', 'involve-your-fans-and-let-them-get-creative', 'LEGO has lots of fans around the globe. And a product that people can easily get creative with. For Pride Month they asked people to create something that reflects pride. From all of the pictures they received, they chose a few highlights to share with everyone on Facebook. Which got them quite some likes and positive feedback in the comments.', 1, '2023-06-17 20:03:53', '2023-06-17 20:03:53'),
+(38, 'IKEA', 'ikea', 'IKEA is a Scandanavian furniture chain with stores around the world. They are, in their own words, taking ambitious steps towards a more sustainable future. One of their LinkedIn posts that performed well was about their goal to serve a 50% plant-based menu by 2025. Which is interesting, as it has little to do with their main product (furniture and home accessories). But it makes sense when you think about it. You can find a restaurant in almost every IKEA store and they also sell food products that people can take home. And sustainability is becoming a serious factor in people’s considerations to buy somewhere. This post shows us that a lot of IKEA followers respond well to this focus on sustainability.', 1, '2023-06-17 20:04:20', '2023-06-17 20:04:20'),
+(39, 'OREO', 'oreo', 'We’re assuming you’re familiar with OREO, but if you’re not: it’s an American brand that mainly sells cookies. Although they’re mostly known for their classic Oreo cookie, they also offer other flavors. In a recent Instagram Story they asked their fans to choose their favorite flavor.\n\nWhat’s good about this type of story is that they’re easy to interact with for people that are viewing the story. They only need to tap their screen once and they directly get to see the results so far. It’s fun to see and it gives you valuable information about your audience. Plus, this kind of Instagram Story, in which you ask a question, is relatively easy to make.', 1, '2023-06-17 20:05:18', '2023-06-18 09:14:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 2, 'note_manager_app_token', 'd76436137c6f0a436480d225e23ce6a4d292d080a12758a84f2071e7995d5485', '[\"*\"]', '2023-06-12 06:41:39', '2023-06-12 06:39:51', '2023-06-12 06:41:39'),
+(2, 'App\\Models\\User', 3, 'note_manager_app_token', 'bc958826e260600fb8e5ca1176697550d3dd700c7fd718b9bd806a6655306a36', '[\"*\"]', '2023-06-12 06:59:43', '2023-06-12 06:59:27', '2023-06-12 06:59:43'),
+(4, 'App\\Models\\User', 4, 'note_manager_app_token', '124f754685391e460082be02d424792e3fe724bacc6d03dc38c5cc80d20d0296', '[\"*\"]', NULL, '2023-06-12 07:22:52', '2023-06-12 07:22:52'),
+(5, 'App\\Models\\User', 4, 'note_manager_app_token', '0ec0fc5136eeeae637a74e7a736db6dd28d2296d412b86c9bd494c088a9b74ba', '[\"*\"]', NULL, '2023-06-12 07:23:18', '2023-06-12 07:23:18'),
+(6, 'App\\Models\\User', 4, 'note_manager_app_token', 'd8fe2ed3a3e419adbba85e6880e88474e406dc57385240af76465e0b70a52bd3', '[\"*\"]', NULL, '2023-06-12 07:25:02', '2023-06-12 07:25:02'),
+(7, 'App\\Models\\User', 4, 'note_manager_app_token', '258f93ab795a896769740a75dd838dd1213eaf9480507455cdc58284a0e8fa04', '[\"*\"]', NULL, '2023-06-12 07:43:44', '2023-06-12 07:43:44'),
+(8, 'App\\Models\\User', 4, 'note_manager_app_token', 'a9b8bbc65d927b296eda160627c081461e865720217aee572e98f7de8f33b794', '[\"*\"]', '2023-06-14 05:56:34', '2023-06-13 01:24:53', '2023-06-14 05:56:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Zeeshan Akhtar', 'Zeeshan@test.com', NULL, '$2y$10$bh6fQwghBOQy6U5SiA/2HeGX9XPfETE/Rp/NXhOJc1o0eEqBrVNI2', NULL, NULL, NULL),
+(2, 'Shaan', 'shaan@gmail.com', NULL, '$2y$10$bh6fQwghBOQy6U5SiA/2HeGX9XPfETE/Rp/NXhOJc1o0eEqBrVNI2', NULL, '2023-06-12 06:39:51', '2023-06-12 06:39:51'),
+(3, 'Sohan', 'Sohan@gmail.com', NULL, '$2y$10$W9/rFxzwlOIvY1ptHxagNeBSSLutAMkaRtoMQw4H.94EEHcwp3WOG', NULL, '2023-06-12 06:59:27', '2023-06-12 06:59:27'),
+(4, 'Tofazzol', 'tofazzol@gmail.com', NULL, '$2y$10$aJ1/9jprUCjY4CnjwNHOFObH6bkSd/FThgdbYdzU4Ml4I1xWbuOz6', NULL, '2023-06-12 07:10:52', '2023-06-12 07:10:52');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notes_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `notes`
+--
+ALTER TABLE `notes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `notes`
+--
+ALTER TABLE `notes`
+  ADD CONSTRAINT `notes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
