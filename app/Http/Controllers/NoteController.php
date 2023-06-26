@@ -14,7 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return Note::all();
+        return Note::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -31,7 +31,8 @@ class NoteController extends Controller
             // 'user_id' => 'required'
         ]);
 
-        return Note::create($request->all() + ['user_id' => auth()->user()->id]);
+        // return Note::create($request->all() + ['user_id' => auth()->user()->id]);
+        return Note::create($request->all() + ['user_id' => 1]);
 
         // $note_data['user_id'] = auth()->user()->id;
         // return Note::create($note_data);
@@ -46,6 +47,16 @@ class NoteController extends Controller
     public function show($id)
     {
         return Note::find($id);
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function view($slug)
+    {
+        return Note::find($slug);
     }
 
     /**

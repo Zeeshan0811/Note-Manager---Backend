@@ -26,13 +26,16 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/notes', [NoteController::class, 'index']);
 Route::get('/notes/{id}', [NoteController::class, 'show']);
 Route::get('/notes/search/{key}', [NoteController::class, 'search']);
+Route::get('/note/{slug}', [NoteController::class, 'view']);
+
+Route::group(['middleware' => 'cors'], function () {
+    Route::post('/notes', [NoteController::class, 'store']);
+    Route::put('/notes/{id}', [NoteController::class, 'update']);
+    Route::delete('/notes/{id}', [NoteController::class, 'destroy']);
+});
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/current_user', [AuthController::class, 'current_user']);
     Route::get('/logout', [AuthController::class, 'logout']);
-
-    Route::post('/notes', [NoteController::class, 'store']);
-    Route::put('/notes/{id}', [NoteController::class, 'update']);
-    Route::delete('/notes/{id}', [NoteController::class, 'destroy']);
 });
